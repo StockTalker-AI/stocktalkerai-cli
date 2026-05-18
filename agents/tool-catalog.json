@@ -114,6 +114,35 @@
       ]
     },
     {
+      "name": "alert_edit",
+      "description": "Edit an existing alert. You can update its note or the list it belongs to.",
+      "command": ["stocktalkerai", "alert", "edit"],
+      "arguments": [
+        {
+          "name": "id",
+          "description": "The ID of the alert to edit.",
+          "required": true,
+          "positional": true
+        },
+        {
+          "name": "--list",
+          "description": "Update the list ID. Pass an empty string \"\" to remove the alert from any list.",
+          "type": "string"
+        },
+        {
+          "name": "--note",
+          "description": "Update the note attached to the alert. Pass an empty string \"\" to remove the note.",
+          "type": "string"
+        },
+        {
+          "name": "-o",
+          "description": "Always pass json",
+          "required": true,
+          "default": "json"
+        }
+      ]
+    },
+    {
       "name": "alert_archive",
       "description": "Archive a stock alert by its ID (disables it safely without a hard delete). Requires STOCKTALKERAI_API_KEY.",
       "command": ["stocktalkerai", "alert", "archive"],

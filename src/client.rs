@@ -47,6 +47,13 @@ impl Client {
         self.handle_response(res).await
     }
 
+    pub async fn patch<T: Serialize + ?Sized>(&self, path: &str, body: &T) -> Result<Value, anyhow::Error> {
+        let url = format!("{}{}", BASE_URL, path);
+        let builder = self.http.patch(&url).json(body);
+        let res = self.maybe_auth(builder).send().await?;
+        self.handle_response(res).await
+    }
+
     async fn handle_response(&self, res: Response) -> Result<Value, anyhow::Error> {
         let status = res.status();
         let payload: Value = res.json().await?;

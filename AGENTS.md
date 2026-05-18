@@ -40,6 +40,7 @@ Your compiled binary will be located at `./target/release/stocktalkerai`.
 * **Account**: `stocktalkerai account -o json` -> Returns your user tier and active alert count.
 * **Alert Ls**: `stocktalkerai alert ls [--list <id>] -o json` -> List all alerts, optionally filtered by a list ID.
 * **Alert Create**: `stocktalkerai alert create "Notify me when AAPL crosses $200" [--list <id>] [--note <"text">] [--full] -o json` -> Generates an alert, optionally attaching it to a list or adding a note.
+* **Alert Edit**: `stocktalkerai alert edit <id> [--list <id>] [--note <"text">] -o json` -> Updates an existing alert. Pass an empty string (`""`) to remove a list or note.
 * **Alert Archive**: `stocktalkerai alert archive <id> -o json` -> Safely archives (disables) an alert.
 * **List Ls**: `stocktalkerai list ls -o json` -> Retrieves all alert list groups assigned to the user.
 

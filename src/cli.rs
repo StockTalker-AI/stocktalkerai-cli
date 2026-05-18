@@ -78,6 +78,16 @@ pub enum AlertCommand {
         #[arg(long)]
         full: bool,
     },
+    /// Edit an existing alert
+    Edit {
+        id: String,
+        /// Update or remove list ID (pass "" to remove)
+        #[arg(long)]
+        list: Option<String>,
+        /// Update or remove note (pass "" to remove)
+        #[arg(long)]
+        note: Option<String>,
+    },
     /// Archive an alert
     Archive {
         id: String,

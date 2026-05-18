@@ -71,6 +71,18 @@ async fn main() -> anyhow::Result<()> {
                 };
                 client.post(path, &body).await?
             }
+            AlertCommand::Edit { id, list, note } => {
+                let mut body = serde_json::json!({});
+                if let Some(obj) = body.as_object_mut() {
+                    if let Some(l) = list {
+                        obj.insert("listId".to_string(), serde_json::json!(l));
+                    }
+                    if let Some(n) = note {
+                        obj.insert("note".to_string(), serde_json::json!(n));
+                    }
+                }
+                client.patch(&format!("/alerts/{}", id), &body).await?
+            }
             AlertCommand::Archive { id } => {
                 client.delete(&format!("/alerts/{}", id)).await?
             }
