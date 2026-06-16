@@ -52,7 +52,7 @@ async fn main() -> anyhow::Result<()> {
             AlertCommand::Get { id } => {
                 client.get(&format!("/alerts/{}", id)).await?
             }
-            AlertCommand::Create { prompt, list, note, full } => {
+            AlertCommand::Create { prompt, list, note, pin, color, full } => {
                 let mut body = serde_json::json!({ "prompt": prompt });
                 
                 if let Some(obj) = body.as_object_mut() {
@@ -61,6 +61,12 @@ async fn main() -> anyhow::Result<()> {
                     }
                     if let Some(n) = note {
                         obj.insert("note".to_string(), serde_json::json!(n));
+                    }
+                    if *pin {
+                        obj.insert("isPinned".to_string(), serde_json::json!(true));
+                    }
+                    if let Some(c) = color {
+                        obj.insert("color".to_string(), serde_json::json!(c));
                     }
                 }
 
@@ -71,7 +77,7 @@ async fn main() -> anyhow::Result<()> {
                 };
                 client.post(path, &body).await?
             }
-            AlertCommand::Edit { id, list, note } => {
+            AlertCommand::Edit { id, list, note, pin, unpin, color, clear_color } => {
                 let mut body = serde_json::json!({});
                 if let Some(obj) = body.as_object_mut() {
                     if let Some(l) = list {
@@ -79,6 +85,18 @@ async fn main() -> anyhow::Result<()> {
                     }
                     if let Some(n) = note {
                         obj.insert("note".to_string(), serde_json::json!(n));
+                    }
+                    if *pin {
+                        obj.insert("isPinned".to_string(), serde_json::json!(true));
+                    }
+                    if *unpin {
+                        obj.insert("isPinned".to_string(), serde_json::json!(false));
+                    }
+                    if let Some(c) = color {
+                        obj.insert("color".to_string(), serde_json::json!(c));
+                    }
+                    if *clear_color {
+                        obj.insert("color".to_string(), serde_json::Value::Null);
                     }
                 }
                 client.patch(&format!("/alerts/{}", id), &body).await?

@@ -99,6 +99,15 @@
           "name": "--note",
           "description": "Optional note to attach to the alert.",
           "type": "string"
+        },        {
+          "name": "--pin",
+          "description": "Pin this alert to the top of its list.",
+          "type": "boolean"
+        },
+        {
+          "name": "--color",
+          "description": "Assign a color to this alert (blue, green, yellow, red, purple).",
+          "type": "string"
         },
         {
           "name": "--full",
@@ -115,7 +124,7 @@
     },
     {
       "name": "alert_edit",
-      "description": "Edit an existing alert. You can update its note or the list it belongs to.",
+      "description": "Edit an existing alert. You can update its note, list, pin status, or color.",
       "command": ["stocktalkerai", "alert", "edit"],
       "arguments": [
         {
@@ -133,6 +142,26 @@
           "name": "--note",
           "description": "Update the note attached to the alert. Pass an empty string \"\" to remove the note.",
           "type": "string"
+        },
+        {
+          "name": "--pin",
+          "description": "Pin this alert to the top of its list.",
+          "type": "boolean"
+        },
+        {
+          "name": "--unpin",
+          "description": "Unpin this alert.",
+          "type": "boolean"
+        },
+        {
+          "name": "--color",
+          "description": "Assign a color to this alert (blue, green, yellow, red, purple).",
+          "type": "string"
+        },
+        {
+          "name": "--clear-color",
+          "description": "Remove color assignment from this alert.",
+          "type": "boolean"
         },
         {
           "name": "-o",
