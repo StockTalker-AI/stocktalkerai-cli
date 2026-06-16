@@ -74,6 +74,12 @@ pub enum AlertCommand {
         /// Optional note to attach to this alert
         #[arg(long)]
         note: Option<String>,
+        /// Pin this alert to the top of its list
+        #[arg(long)]
+        pin: bool,
+        /// Assign a color to this alert (blue, green, yellow, red, purple)
+        #[arg(long)]
+        color: Option<String>,
         /// Return the full underlying nested alert object
         #[arg(long)]
         full: bool,
@@ -87,6 +93,18 @@ pub enum AlertCommand {
         /// Update or remove note (pass "" to remove)
         #[arg(long)]
         note: Option<String>,
+        /// Pin this alert to the top of its list
+        #[arg(long)]
+        pin: bool,
+        /// Unpin this alert
+        #[arg(long)]
+        unpin: bool,
+        /// Assign a color to this alert (blue, green, yellow, red, purple)
+        #[arg(long)]
+        color: Option<String>,
+        /// Remove color assignment from this alert
+        #[arg(long)]
+        clear_color: bool,
     },
     /// Archive an alert
     Archive {
